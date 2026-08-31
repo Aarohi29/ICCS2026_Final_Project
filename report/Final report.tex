@@ -1,0 +1,362 @@
+\documentclass[11pt,a4paper]{article}
+
+% --------------------------------------------------
+% Preamble from macros_FP.tex
+% --------------------------------------------------
+% start of paragraph with no indent
+\parindent0pt
+
+% insert packages in alphabetical order
+\usepackage{algorithm, algpseudocode, amssymb, amsthm, bbm, csquotes, docmute, enumitem, float, geometry, graphicx, hyphenat, listings, mathtools, physics, tcolorbox, tikz, tocloft, xcolor, natbib}
+\usepackage[english]{babel}
+
+% load packages
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\usepackage{amsfonts}
+\usepackage[usenames, dvipsnames]{color}
+%\usepackage{bbold}
+%\usepackage{url}
+\usepackage{upgreek}
+\usepackage{placeins}
+\usepackage{empheq}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\definecolor{red}{RGB}{255, 0, 0}
+\usepackage{tabto}
+\usepackage{tgtermes,tgheros} 
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleformat{\section}[block]
+  {\fontsize{12}{15}\bfseries\sffamily\filcenter}
+  {\thesection}
+  {1em}
+  {\MakeUppercase}
+\titleformat{\subsection}[hang]
+  {\fontsize{12}{15}\bfseries\sffamily}
+  {\thesubsection}
+  {1em}
+  {}
+
+\allowdisplaybreaks
+
+% math symbols
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bL}{\mathbb{L}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bW}{\mathbb{W}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\NewDocumentCommand{\codeword}{v}{%
+\texttt{\textcolor{blue}{#1}}%
+}
+
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+\newcommand{\e}{\text{e}}
+
+\newcommand{\ber}{\text{Ber}}
+\newcommand{\bin}{\text{Bin}}
+\newcommand{\poi}{\text{Poi}}
+\newcommand{\geo}{\text{Geo}}
+\newcommand{\Exp}{\text{Exp}}
+
+\newcommand{\cov}{\text{Cov}}
+\newcommand{\corr}{\rho}
+\newcommand{\risk}{\text{R}}
+\newcommand{\bias}{\text{Bias}}
+\newcommand{\mse}{\text{MSE}}
+\newcommand{\se}{\text{SE}}
+\newcommand{\elbo}{\text{ELBO}}
+\newcommand{\kl}{\text{KL}}
+
+\newcommand{\acov}{\text{acov}}
+\newcommand{\acorr}{\text{acorr}}
+\newcommand{\xcov}{\text{xcov}}
+\newcommand{\xcorr}{\text{xcorr}}
+\newcommand{\pacorr}{\text{pacorr}}
+\newcommand{\pacov}{\text{pacov}}
+
+\newcommand{\relu}{\text{ReLU}}
+
+\newcommand{\deriv}[2]{\frac{\partial #1}{\partial #2}}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+% math environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{task}[definition]{Task}
+
+\newenvironment{boxedtheorem}[1][]
+{\begin{tcolorbox}[colback=white!95!gray, colframe=black, title=#1]}
+{\end{tcolorbox}}
+
+\newenvironment{boxeddefinition}[1][]
+{\begin{tcolorbox}[colback=white, colframe=grey, title=#1]}
+{\end{tcolorbox}}
+
+% --------------------------------------------------
+% Page layout & Paragraph formatting adjustments
+% --------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% --------------------------------------------------
+% Title information
+% --------------------------------------------------
+\title{
+    \textbf{Value-to-Reaction Time Mappings in Decision Making}\\[0.5em]
+    \textbf{}
+}
+
+\author{
+    Computational Cognitive Science Final Project, Summer Term 2026
+    \\[1.5em]
+    \begin{tabular}{lll}
+        \textbf{Name} & \textbf{Matriculation no.} & \textbf{Contribution} \\
+        \midrule
+        Aarohi Verma & 4742978 & Exponential Indifference Model \\
+        Lakshay Gupta & 4767898 & Magnitude + Conflict Model \\
+        Ayushi Chauhan & 4767901 & Squared Conflict Model \\
+    \end{tabular}
+}
+
+\date{}
+
+% --------------------------------------------------
+% Document
+% --------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\vspace{0.5em}
+
+\textbf{Requested assessment:} Full Grading
+
+% --------------------------------------------------
+% Abstract
+% --------------------------------------------------
+\begin{abstract}
+We investigate whether jointly modeling binary choices and deliberation reaction times (RTs) in intertemporal choice constrains latent valuation parameters and improves predictive performance. Using a delay discounting dataset ($N=99$), we fix the valuation model to standard hyperbolic discounting coupled with a logistic sigmoid choice rule. On top of this shared valuation process, we specify and evaluate three competing value-to-RT mapping hypotheses using a log-normal noise distribution: (1) Squared Conflict, (2) Magnitude + Conflict, and (3) Exponential Indifference. Synthetic parameter recovery demonstrated that choice sensitivity ($\beta$) and RT parameters are highly identifiable, but the discount rate ($\kappa$) is poorly recovered ($r=-0.005$). Incorporating the continuous RT modality did not substantially improve the estimation precision of the discount rate compared to a choice-only baseline. Test-retest reliability across experimental runs revealed weak cross-session stability for the discount rate ($r=-0.035$), but strong reliability for the RT baseline parameter ($r=0.710$). On out-of-sample evaluation (Run B), modeling RT did not significantly improve choice prediction ($W=1183.0$, $p=0.2706$). The Exponential Indifference model yielded a Mean Absolute Error of 688.94 ms, outperforming the mean RT baseline MAE of 714.47 ms by 3.57\%. However, the Magnitude + Conflict model achieved the lowest overall Log-RT MSE. We conclude that while RT modeling captures certain response dynamics, it does not significantly improve out-of-sample choice prediction or $\kappa$ identifiability.
+\end{abstract}
+
+% --------------------------------------------------
+% Introduction
+% --------------------------------------------------
+\section{INTRODUCTION}
+
+In intertemporal decision-making, choice models typically focus on whether an agent selects an immediate or a delayed reward. While standard discounting functions capture subjective value over time, they traditionally leave out response times (RTs). Deliberation latencies provide direct, real-time insight into decision difficulty and cognitive conflict that choice proportions alone do not reveal.
+
+In this project, we model choices and response times simultaneously as outputs of a single generative process driven by shared latent values. We keep the valuation architecture fixed using a standard hyperbolic discounting function (where subjective value $SV = r / (1 + \kappa \cdot d)$) combined with a logistic sigmoid choice rule based on the value difference between options ($\Delta V$). On top of this fixed valuation process, we implement and compare three distinct value-to-RT mapping hypotheses:
+
+\begin{itemize}
+    \item \textbf{Squared Conflict} ($\mu = a - b(\Delta V)^2$): Assumes cognitive friction peaks quadratically near indifference ($\Delta V \approx 0$) and drops as value differences widen, reflecting non-linear conflict scaling.
+    \item \textbf{Magnitude + Conflict} ($\mu = \beta_0 - \beta_1|\Delta V| + \beta_2(V_{\text{imm}} + V_{\text{del}})$): Assumes response latencies reflect two distinct processes: relative decision difficulty (conflict) and an overall incentive/urgency effect modulated by the absolute reward stakes (magnitude).
+    \item \textbf{Exponential Indifference} ($\mu = a + b \exp(-c|\Delta V|)$): Hypothesizes that deliberation time peaks at subjective indifference and decays exponentially as the value gap increases, capturing a sharp cognitive bottleneck.
+\end{itemize}
+
+Through our evaluation, we find that the Magnitude + Conflict model provides the best empirical RT fit by successfully accounting for both relative choice difficulty and absolute reward stakes. Furthermore, while choice sensitivity and RT baseline parameters prove highly identifiable and stable across experimental runs, the core discount rate ($\kappa$) acts as a fluctuating cognitive state that is practically unidentifiable in synthetic recovery and lacks cross-session stability. Ultimately, jointly modeling RT does not significantly improve out-of-sample choice predictions compared to a choice-only baseline, nor does it meaningfully sharpen the estimation precision of the unidentifiable valuation parameters.
+
+% --------------------------------------------------
+% Methods
+% --------------------------------------------------
+\section{METHODS}
+
+\subsection{Data}
+
+We analyze a delay discounting dataset of $N=99$ participants across two consecutive runs: an initial training run (Run A, \texttt{train}) used for inference, and an evaluation run (Run B, \texttt{test}) used for out-of-sample evaluation. In each trial, participants chose between an immediate reward ($r_{\text{imm}}$) and a delayed reward ($r_{\text{del}}$) after a given delay ($d$), which serve as our predictor variables. All analyzed trials belong to the reward discounting condition ($\text{condition} = 1.0$); the loss condition was dropped due to insufficient trial counts ($n<5$) across participants.
+
+To stabilize optimization across different reward ranges, rewards were max-scaled per participant. Trials with missing responses ($\text{choice} = 0$) or non-positive RTs were removed, leaving 8,886 valid training trials and 19,952 valid test trials. Valid RTs were log-transformed prior to modeling to accommodate their strictly positive nature.
+
+\paragraph{Basic Descriptives:}
+In the analyzed reward condition, the empirical distribution of reaction times is strictly positive and right-skewed. The training dataset (Run A) yielded a baseline mean reaction time of 1913.05 ms. Choice proportions varied by participant, reflecting individual differences in impulsivity and baseline preference for the immediate versus delayed options.
+
+\subsection{Models}
+
+\paragraph{Valuation Model and Choice Rule (Fixed):}
+For each trial with immediate reward $r_{\text{imm}}$, delayed reward $r_{\text{del}}$, and delay $d$, subjective values are calculated using standard hyperbolic discounting:
+
+\begin{equation}
+    V_{\text{imm}} = r_{\text{imm}}, \quad
+    V_{\text{del}} = \frac{r_{\text{del}}}{1 + \kappa \cdot d}, \quad
+    \Delta V = V_{\text{imm}} - V_{\text{del}}
+\end{equation}
+
+where $\kappa > 0$ is the participant's discount rate. The value difference $\Delta V$ maps to the probability of choosing the immediate option via a logistic sigmoid rule:
+
+\begin{equation}
+    P(\text{choice} = 1) = \frac{1}{1 + e^{-\beta \cdot \Delta V}}
+\end{equation}
+
+where $\beta > 0$ represents choice sensitivity.
+
+\paragraph{RT Models (Value-to-RT Mappings):}
+To ensure a consistent comparison, all three RT models use a Gaussian noise distribution applied to log-transformed RTs:
+
+\begin{equation}
+    \log(\text{RT}_i) \sim \mathcal{N}(\mu_i, \sigma^2)
+\end{equation}
+
+where $\sigma > 0$ is the residual standard deviation, and $\mu_i$ is the predicted log-RT location defined by each model:
+
+\begin{itemize}
+    \item \textbf{Squared Conflict:} Assumes cognitive friction peaks quadratically near indifference ($\Delta V \approx 0$) and drops as value differences widen.
+    \item \textbf{Magnitude + Conflict:} Assumes response latencies reflect two distinct processes: decision difficulty ($|\Delta V|$) and an overall incentive/urgency effect ($V_{\text{imm}} + V_{\text{del}}$) where larger overall rewards modulate speed.
+    \item \textbf{Exponential Indifference:} Hypothesizes that deliberation time peaks at subjective indifference and decays exponentially away from it.
+\end{itemize}
+
+\paragraph{Choice-Only Baseline:}
+To test whether adding reaction times provides meaningful constraints, we fit a choice-only baseline using the exact same hyperbolic valuation model and sigmoid choice rule, minimizing choice negative log-likelihood and omitting the RT term entirely.
+
+\subsection{Inference}
+
+Model parameters were estimated independently per participant on Run A via Maximum Likelihood Estimation (MLE). The objective function minimized during optimization was the negative log-likelihood (comprising either the choice-only likelihood or the joint choice and RT likelihood). We utilized the L-BFGS-B and Nelder-Mead optimization algorithms. Because L-BFGS-B allows for bounded constraints, it was used to ensure psychological plausibility of the estimates (e.g., strictly positive noise variance and bounded discount rates).
+
+To handle convergence and prevent the optimizer from getting trapped in local minima, we employed randomized multi-start initializations with 3 to 6 restarts per participant. Finally, an L2 regularization penalty ($\lambda = 0.01$) was applied to the objective function. This regularization was justified to prevent extreme parameter estimates and over-fitting, which is particularly necessary to stabilize the inherently difficult-to-identify choice sensitivity ($\beta$) and discount rate ($\kappa$) parameters.
+
+\subsection{Evaluation Plan}
+
+We evaluate our modeling pipeline across four steps:
+\begin{enumerate}
+    \item \textbf{Parameter Recovery:} Simulate synthetic datasets across realistic parameter configurations, re-fit models, and compute Pearson correlations ($r$) between true and recovered parameters to assess structural and practical identifiability.
+    \item \textbf{Test-Retest Reliability:} Fit models independently to Run A and Run B, computing cross-session Pearson correlations ($r$) across participants to evaluate the stability of the estimated constructs.
+    \item \textbf{Out-of-Sample Prediction:} Evaluate Run A parameter estimates on held-out Run B trials. To explicitly compare the three RT models against each other, we use an RT predictive quantity: the out-of-sample Log-RT Mean Squared Error (MSE).
+    \item \textbf{Value of the RT Modality:} To test whether modeling RT improves our account of choices, we compare the joint Choice+RT fits against the Choice-Only baseline explicitly using a choice predictive quantity: the out-of-sample Choice Log-Loss on Run B.
+\end{enumerate}
+
+% --------------------------------------------------
+% Results
+% --------------------------------------------------
+\section{RESULTS}
+
+\subsection{Parameter Recovery and Identifiability}
+
+To evaluate structural and practical identifiability, we simulated synthetic data across realistic impulsive and patient profiles. Parameter recovery simulations on the Squared-Conflict model demonstrated that choice sensitivity ($\gamma$, $r=0.946$), the RT baseline ($a$, $r=0.986$), the RT slope ($b$, $r=0.700$), and the noise variance ($\sigma$, $r=0.940$) are highly identifiable. However, the discount rate ($\kappa$) was completely unidentifiable ($r=-0.005$). Comparing the recovery of the choice-only baseline to the joint model revealed that adding RT did not improve $\kappa$ identifiability ($r=-0.007$ vs. $r=-0.005$).
+
+\subsection{Reliability}
+
+To evaluate the stability of the discounting construct, models were estimated independently on Run A and Run B. Test-retest reliability across runs demonstrated that the RT intercept ($a$) represents a highly stable psychological construct across time ($r=0.710$). Choice sensitivity ($\gamma$) and RT variance ($\sigma$) showed moderate reliability ($r=0.402$ and $r=0.473$, respectively). The discount rate ($\kappa$) and RT slope ($b$) lacked cross-run stability ($r=-0.035$ and $r=-0.130$). Modeling RT did not improve the test-retest reliability of the core choice parameters compared to the choice-only baseline ($\kappa$: $r=-0.057$ vs $r=-0.035$; $\gamma$: $r=0.424$ vs $r=0.402$).
+
+\subsection{Predictive Performance (Choice and RT, by Condition)}
+
+Out-of-sample prediction was assessed by applying Run A parameter estimates to Run B.
+
+\begin{table}[h!]
+    \centering
+    \small
+    \begin{tabular}{llcc}
+        \toprule
+        \textbf{Model}
+        & \textbf{Value-to-RT Mapping ($\mu$)}
+        & \textbf{Choice Log-Loss} ($\downarrow$)
+        & \textbf{Log-RT MSE} ($\downarrow$) \\
+        \midrule
+        Choice-Only Baseline
+        & ---
+        & \textbf{0.6722}
+        & --- \\
+
+        Squared Conflict
+        & $a - b(\Delta V)^2$
+        & 0.6734
+        & 0.2284 \\
+
+        Magnitude + Conflict
+        & $\beta_0 - \beta_1|\Delta V| + \beta_2(V_{\text{imm}} + V_{\text{del}})$
+        & 0.6731
+        & \textbf{0.2205} \\
+
+        Exponential Indifference
+        & $a + b \exp(-c|\Delta V|)$
+        & 0.6739
+        & 0.2837 \\
+
+        \bottomrule
+    \end{tabular}
+
+    \caption{Out-of-sample predictive performance on Run B held-out trials.}
+    \label{tab:predictive_perf}
+\end{table}
+
+When translating predictions back to milliseconds, the Exponential Indifference RT model yielded a Mean Absolute Error (MAE) of 688.94 ms and a Root Mean Squared Error (RMSE) of 932.95 ms. This represents a 3.57\% MAE improvement and a 1.24\% RMSE improvement over the Mean RT Baseline (MAE: 714.47 ms, RMSE: 944.67 ms). However, comparing models on the shared log-scale, the Magnitude + Conflict model achieved the most accurate RT mapping with a Log-RT MSE of 0.2205.
+
+\subsection{Value of the RT Modality}
+
+When comparing the out-of-sample choice log-loss between the choice-only baseline and the joint Magnitude+Conflict model, a Wilcoxon test resulted in $W=1183.0$ and $p=0.2706$. Incorporating the RT modality into the joint likelihood did not significantly improve out-of-sample choice predictions. Furthermore, modeling RT did not meaningfully sharpen the recovery or test-retest reliability of the discounting parameters.
+
+% --------------------------------------------------
+% Discussion
+% --------------------------------------------------
+\section{DISCUSSION}
+
+We evaluated three joint models to determine if incorporating RT improves choice prediction and parameter estimation. Based on our predictive evaluation, we recommend the \textbf{Magnitude + Conflict} RT model. While the Exponential Indifference model successfully demonstrated a 3.57\% MAE improvement over a static mean baseline, the Magnitude + Conflict mapping achieved the lowest Log-RT MSE overall. Furthermore, it provides the most comprehensive psychological account by acknowledging that response speed is modulated by both relative decision difficulty ($|\Delta V|$) and absolute reward magnitude ($V_{\text{imm}} + V_{\text{del}}$).
+
+To answer the central question of whether modeling RT was worthwhile: for the specific goal of improving our account of choices, it was not. None of the joint RT models significantly outperformed the choice-only baseline in predicting held-out binary decisions. However, modeling RT was worthwhile for understanding response mechanics, establishing that RTs cleanly and systematically reflect decision conflict, yielding highly stable parameters such as the RT intercept ($a$).
+
+Our analyses successfully established the mapping between value and response speed, but they could not establish a reliable trait-level discounting construct. The primary limitation of this study is the extreme difficulty in identifying and recovering the core discount rate ($\kappa$), which exhibited near-zero correlation in both synthetic recovery and test-retest splits. Because $\kappa$ was unidentifiable from the choices themselves, incorporating the RT modality did not inherently contain enough structural information to rescue the parameter.
+
+Two concrete next steps would improve this framework. First, utilizing datasets with more expansive delay intervals could create steeper discounting curves, making $\kappa$ easier to identify. Second, moving from a descriptive log-normal mapping to a sequential-sampling mechanism (such as a Drift-Diffusion Model) would parse boundary separation from drift rate, yielding a much richer, mechanistic integration of the two modalities.
+
+\end{document}
